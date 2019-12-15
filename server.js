@@ -1,6 +1,6 @@
 var express = require("express");
 var logger = require("morgan");
-var handlebars = require("express-handlebars")
+var exphbs = require("express-handlebars")
 var mongoose = require("mongoose");
 
 // Our scraping tools
@@ -26,6 +26,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 // Make public a static folder
 app.use(express.static("public"));
+
+app.engine("handlebars", exphbs({defaultLayout: "main"}));
+app.set("view engine", "handlebbars");
 
 // Connect to the Mongo DB
 mongoose.connect("mongodb://localhost/unit18Populater", { useNewUrlParser: true });
